@@ -17,23 +17,24 @@ public class EventTracker implements Tracker {
 
     synchronized public void push(String message) {
         if (has(message)) {
-            this.tracker.put(message, this.tracker.get(message)+1);
+            Integer temp = this.tracker.get(message);
+            this.tracker.remove(message);
+            this.tracker.put(message, temp+1);
         } else {
             this.tracker.put(message, 1);
         }
     }
 
     synchronized public Boolean has(String message) {
-        if (this.tracker.containsKey(message)
-                && (this.tracker.get(message) > 0)) {
-            return true;
-        }
-        return false;
+        return this.tracker.containsKey(message)
+                && (this.tracker.get(message) > 0);
     }
 
     synchronized public void handle(String message, EventHandler e) {
-        e.handle();
-        this.tracker.put(message, this.tracker.get(message)-1);
+            Integer temp = this.tracker.get(message);
+            this.tracker.remove(message);
+            this.tracker.put(message, temp - 1);
+            e.handle();
     }
 
     @Override
