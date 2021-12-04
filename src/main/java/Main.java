@@ -9,7 +9,9 @@ public class Main {
             // You may add more listeners if you would like once all tests are passing
             new EventListener("apple", "I love macbooks"),
             new EventListener("java", "I could go for some coffee"),
-            new EventListener("zipcode", "rocks!")
+            new EventListener("zipcode", "rocks!"),
+            new EventListener("sleep", "is good"),
+            new EventListener("water", "keeps you hydrated")
         ).forEach(Thread::start);
 
         System.out.println("Start typing messages to the console now. Enter \"quit\" to exit the program");
